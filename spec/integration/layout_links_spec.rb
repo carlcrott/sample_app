@@ -25,5 +25,6 @@ describe "Layout links" do
     get '/signup'
     response.should render_template('users/new')
   end
+
 end
 
