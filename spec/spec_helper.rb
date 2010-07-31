@@ -12,7 +12,7 @@ require "webrat"
 
 	Webrat.configure do |config|
 		config.mode = :rails
-end
+	end
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
