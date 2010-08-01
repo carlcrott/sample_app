@@ -44,6 +44,26 @@ describe UsersController do
 			get 'new'
 			response.should have_tag("title", /Sign up/)
 		end
+
+		it "should have a name field" do
+      get :new
+      response.should have_tag("input[name=?][type=?]", "user[name]", "text")
+    end
+
+    it "should have an email field" do
+			get :new
+			response.should have_tag("input[name=?][type=?]", "user[email]", "text")
+		end
+
+    it "should have a password field" do
+			get :new
+			response.should have_tag("input[name=?][type=?]", "user[password]", "password")
+		end
+
+    it "should have a password confirmation field" do
+			get :new
+			response.should have_tag("input[name=?][type=?]", "user[password_confirmation]", "password")
+		end
   end
 
 	describe "POST 'create'" do
@@ -69,7 +89,7 @@ describe UsersController do
       end
     end
 
-	describe "success" do
+		describe "success" do
 
       before(:each) do
         @attr = { :name => "New User", :email => "user@example.com",
@@ -77,6 +97,11 @@ describe UsersController do
         @user = Factory(:user, @attr)
         User.stub!(:new).and_return(@user)
         @user.should_receive(:save).and_return(true)
+      end
+
+			it "should sign the user in" do
+        post :create, :user => @attr
+        controller.should be_signed_in
       end
 
       it "should redirect to the user show page" do
@@ -87,10 +112,8 @@ describe UsersController do
 			it "should have a welcome message" do
         post :create, :user => @attr
         flash[:success].should =~ /welcome to the sample app/i
-      end 
+      end
     end
-
   end
-
 end
 
