@@ -5,6 +5,7 @@
         <%= gravatar_for @user %>
         <%= h @user.name %>
       </h2>
+      <%= image_tag @user.photo.url(:small) %>
     </td>
     <td class="sidebar round">
       <strong>Name</strong> <%= h @user.name %><br />

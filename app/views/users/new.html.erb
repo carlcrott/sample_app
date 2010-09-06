@@ -1,6 +1,6 @@
 <h2>Sign up</h2>
 
-<% form_for(@user) do |f| %>
+<% form_for @user, :html => {:multipart => true} do |f| %>
 	<%= f.error_messages %>
   <div class="field">
     <%= f.label :name %><br />
@@ -17,6 +17,10 @@
   <div class="field">
     <%= f.label :password_confirmation, "Confirmation" %><br />
     <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :photo, "Photo" %><br />
+    <%= f.file_field :photo %>
   </div>
   <div class="actions">
     <%= f.submit "Sign up" %>
